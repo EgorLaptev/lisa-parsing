@@ -8,6 +8,7 @@ from helpers.DocumentFormater import DocumentFormater
 from datetime import datetime
 
 
+# Load model's role
 load_dotenv('config/open.env')
 
 with open('config/roles/role.txt', 'r', encoding='UTF-8') as file:
@@ -27,6 +28,7 @@ class OpenModel:
 
         self.messages = []
 
+        # set role
         self.messages.append({
             'role': 'system',
             'content': role
@@ -34,6 +36,7 @@ class OpenModel:
 
 
     def send(self, content: str) -> str:
+        """ sending  a message to the model and getting response """
         message = {'role': 'user', 'content': content}
 
         response = self.client.chat.completions.create(
@@ -50,6 +53,7 @@ class OpenModel:
 
 
     def send_file(self, path: str):
+        """ structures the file in json """
         chunks = DocumentFormater.split(path)
         
         results = []
@@ -58,11 +62,10 @@ class OpenModel:
             resp = self.send(chunk.page_content)
             results.append(resp)
             self._log(resp)
-        
-        # doc = open(path, 'r', encoding='UTF-8').read()
 
 
     def _log(self, content):
+        """ saves the model's responses """
         current_datetime = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
         
         with open(f'logs/log_{current_datetime}.txt', 'w', encoding='UTF-8') as log:
