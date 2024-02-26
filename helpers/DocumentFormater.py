@@ -4,10 +4,6 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 class DocumentFormater:    
     @staticmethod
-    def prepare(doc):
-        return doc.replace('\n', ' ')
-    
-    @staticmethod
     def split(doc):
         loader = TextLoader(doc, encoding='utf-8')
         documents = loader.load()
