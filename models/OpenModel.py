@@ -3,8 +3,9 @@ from typing import List, Dict
 from openai import OpenAI
 from dotenv import load_dotenv
 from os import getenv
+import json
 
-from helpers.DocumentFormater import DocumentFormater
+from helpers.DocumentFormatter import DocumentFormatter
 from datetime import datetime
 
 
@@ -34,7 +35,6 @@ class OpenModel:
             'content': role
         })
 
-
     def send(self, content: str) -> str:
         """ sending  a message to the model and getting response """
         message = {'role': 'user', 'content': content}
@@ -47,24 +47,31 @@ class OpenModel:
 
         response_content = response.choices[0].message.content
 
-        if self.logging: self._log(response_content)
+        if self.logging:
+            OpenModel._log(response_content)
 
         return response_content
 
-
     def send_file(self, path: str):
         """ structures the file in json """
-        chunks = DocumentFormater.split(path)
+        chunks = DocumentFormatter.split(path)
         
-        results = []
+        responses = []
         
         for chunk in chunks:
             resp = self.send(chunk.page_content)
-            results.append(resp)
-            self._log(resp)
+            responses.append(resp)
+            OpenModel._log(resp)
 
+        # save results
+        current_datetime = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
 
-    def _log(self, content):
+        with open(f'data/{current_datetime}.json', 'w', encoding='UTF-8') as file_json:
+            data = DocumentFormatter.merge_json(responses)
+            json.dump(data, file_json, ensure_ascii=False)
+
+    @staticmethod
+    def _log(content):
         """ saves the model's responses """
         current_datetime = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
         

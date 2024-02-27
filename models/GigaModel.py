@@ -30,23 +30,23 @@ class GigaModel:
         )
     
     
-    def summarize_file(self, file):
-        documents = DocumentSplitter.split(file)
+    # def summarize_file(self, file):
+    #     documents = DocumentSplitter.split(file)
         
-        map_prompt = load_prompt('lc://prompts/summarize/map_reduce/map.yaml')
-        combine_prompt = load_prompt('lc://prompts/summarize/map_reduce/combine.yaml')
+    #     map_prompt = load_prompt('lc://prompts/summarize/map_reduce/map.yaml')
+    #     combine_prompt = load_prompt('lc://prompts/summarize/map_reduce/combine.yaml')
         
-        chain = load_summarize_chain(
-            self.chat,
-            chain_type="map_reduce",
-            map_prompt=map_prompt,
-            combine_prompt=combine_prompt,
-            verbose=False  
-        )
+    #     chain = load_summarize_chain(
+    #         self.chat,
+    #         chain_type="map_reduce",
+    #         map_prompt=map_prompt,
+    #         combine_prompt=combine_prompt,
+    #         verbose=False  
+    #     )
         
-        result = chain.invoke({ "input_documents": documents })
+    #     result = chain.invoke({ "input_documents": documents })
         
-        return result['output_text'].replace('. ', '.\n')
+    #     return result['output_text'].replace('. ', '.\n')
     
     
     def send_message(self, content):
