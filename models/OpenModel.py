@@ -7,6 +7,7 @@ import json
 
 from helpers.DocumentFormatter import DocumentFormatter
 from datetime import datetime
+from termcolor import colored
 
 
 # Load model's role
@@ -57,11 +58,22 @@ class OpenModel:
         chunks = DocumentFormatter.split(path)
         
         responses = []
-        
-        for chunk in chunks:
-            resp = self.send(chunk.page_content)
-            responses.append(resp)
-            OpenModel._log(resp)
+            
+        for i in range(len(chunks)):
+            chunk = chunks[i]
+            correctJSON = False
+            while not correctJSON:
+                print(colored(f"[{i+1} File] Attemping..", 'dark_grey'))
+                try: 
+                    resp = self.send(chunk.page_content)
+                    json.loads(resp) # validate JSON
+                    responses.append(resp)
+                    OpenModel._log(resp)
+                    correctJSON = True
+                    print(colored(f"[{i+1} File] Success", 'light_green'))
+                except:
+                    correctJSON = False
+                    print(colored(f"[{i+1} File] Corrupted JSON", 'red'))
 
         # save results
         current_datetime = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
