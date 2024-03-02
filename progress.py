@@ -7,10 +7,10 @@ import time
 bar_format = "{l_bar}%s{bar}%s{r_bar}" % (Fore.GREEN, Fore.RESET)
 
 # Длительность выполнения задачи
-duration = 20
+duration = 100000
 
 # Создание прогресс бара
 with tqdm(total=duration, bar_format=bar_format) as progress_bar:
     for _ in range(duration):
-        time.sleep(1)  # Имитация выполнения задачи
+        time.sleep(.00001)  # Имитация выполнения задачи
         progress_bar.update(1)  # Обновление прогресса
