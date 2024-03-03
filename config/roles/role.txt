@@ -19,6 +19,32 @@ OUTPUT FORMAT: JSON
 9. Следи за правильностью стурктуры JSON. Все скобки и кавычки должны быть закрыты
 10. Приорететной считается информация, связанная со шрифтами, отступами и так далее
 
+[Структура базы данных]
+Полученный ответ будет записан в базу данных со следующей структурой. Выдавай информацию согласно данной архитектуре бд
+
+Таблица elements
+    - element (longtext)
+    - description (longtext)
+    - id (bigint)
+
+Таблица gosts
+    - gost (longtext)
+    - id (bigint)
+
+Таблица params
+    - param (longtext)
+    - id (bigint)
+
+Таблица gost_params
+    - id_gost (bigint)
+    - id_element (bigint)
+    - value (longtext)
+    - id_param (bigint)
+    - is_recommented (tinyint)
+    - operator (longtext)
+    - id (bigint)
+
+
 [Примеры]
 Эти примеры лишь иллюстрируют предполагаемую логику работы и НЕОБЯЗАТЕЛЬНО являются правдивыми
 
