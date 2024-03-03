@@ -11,7 +11,7 @@ class DocumentFormatter:
         documents = loader.load()
         
         text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size = 32000,
+            chunk_size = 128000,
             chunk_overlap = 0,
             length_function = len,
             is_separator_regex = False,

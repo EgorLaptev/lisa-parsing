@@ -12,7 +12,7 @@ from termcolor import colored
 # Load model's role
 load_dotenv('config/open.env')
 
-with open('config/roles/role.txt', 'r', encoding='UTF-8') as file:
+with open(f'config/roles/{getenv('ROLE')}.txt', 'r', encoding='UTF-8') as file:
     role = file.read()
 
 
@@ -73,8 +73,9 @@ class OpenModel:
                     print(colored(f"[{i+1} File] Success", 'light_green'))
                 except:
                     correctJSON = False
-                    print(colored(f"[{i+1} File] Corrupted JSON", 'red'))
                     count_bags += 1
+                    OpenModel._log(resp, err=True)
+                    print(colored(f"[{i+1} File] Corrupted JSON", 'red'))
                 if count_bags > 10:
                     break
 
@@ -87,9 +88,9 @@ class OpenModel:
             json.dump(merged_json, file_json, ensure_ascii=False)
 
     @staticmethod
-    def _log(content):
+    def _log(content, err=False):
         """ saves the model's responses """
         current_datetime = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
         
-        with open(f'logs/log_{current_datetime}.txt', 'w', encoding='UTF-8') as log:
+        with open(f'logs/{'err/' if err else ''}log_{current_datetime}.txt', 'w', encoding='UTF-8') as log:
             log.write(content)
