@@ -1,7 +1,10 @@
 from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from dotenv import load_dotenv
+from os import getenv
 import json
 
+load_dotenv('config/open.env')
 
 class DocumentFormatter:
     @staticmethod
@@ -11,8 +14,8 @@ class DocumentFormatter:
         documents = loader.load()
         
         text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size = 128000,
-            chunk_overlap = 0,
+            chunk_size = int(getenv('CHUNK_SIZE')),
+            chunk_overlap = int(getenv('CHUNK_OVERLAP')),
             length_function = len,
             is_separator_regex = False,
         )
@@ -37,6 +40,7 @@ class DocumentFormatter:
         merged = json1.copy()
 
         for key, value in json2.items():
+            key = key.lower()
             if key in merged and isinstance(merged[key], dict) and isinstance(value, dict):
                 merged[key] = DocumentFormatter.merge_json(merged[key], value)
             else:

@@ -64,8 +64,8 @@ class OpenModel:
             while not correctJSON:
                 count_bags = 0
                 print(colored(f"[{i+1} File] Attempting..", 'dark_grey'))
+                resp = self.send(chunk.page_content)
                 try: 
-                    resp = self.send(chunk.page_content)
                     resp_json = json.loads(resp) # validate JSON
                     responses.append(resp_json)
                     OpenModel._log(resp)
