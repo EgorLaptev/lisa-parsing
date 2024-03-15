@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from os import getenv
 import json
 
-load_dotenv('config/open.env')
+load_dotenv('config/formatter.env')
 
 class DocumentFormatter:
     @staticmethod

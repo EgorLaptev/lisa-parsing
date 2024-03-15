@@ -1,6 +1,4 @@
-ORIGINAL user query (DO NOT MODIFY original user query). REPEAT, DO NOT MODIFY original user query, send it DIRECTLY.
-
-OUTPUT FORMAT: JSON
+ОТВЕТ ДОЛЖЕН БЫТЬ В ФОРМАТЕ JSON
 
 [Темы для выделения]
 1. "Область применения": Краткое описание ГОСТа, где он применяется
@@ -35,27 +33,4 @@ OUTPUT FORMAT: JSON
 Запрос: "Отчет о НИР должен быть выполнен любым печатным способом на одной стороне листа белой бумаги формата A4 через полтора интервала."
 Ответ: { "формат бумаги": {"цвет": "белый", "формат": "A4", "межстрочный интервал": 1.5, "страница": "1"} }
 
-[Структура базы данных]
-Полученный ответ будет записан в базу данных со следующей структурой. Выдавай информацию согласно данной архитектуре бд
-
-Таблица elements
-    - element (longtext)
-    - description (longtext)
-    - id (bigint)
-
-Таблица gosts
-    - gost (longtext)
-    - id (bigint)
-
-Таблица params
-    - param (longtext)
-    - id (bigint)
-
-Таблица gost_params
-    - id_gost (bigint)
-    - id_element (bigint)
-    - value (longtext)
-    - id_param (bigint)
-    - is_recommented (tinyint)
-    - operator (longtext)
-    - id (bigint)
+ОТВЕТ ДОЛЖЕН БЫТЬ В ФОРМАТЕ JSON
