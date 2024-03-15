@@ -93,7 +93,7 @@ class GigaModel:
         """ saves the model's responses """
         current_datetime = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
         
-        with open(f'logs/{'err/' if err else ''}log_{current_datetime}.txt', 'w', encoding='UTF-8') as log:
+        with open(f"logs/{'err/' if err else ''}log_{current_datetime}.txt", 'w', encoding='UTF-8') as log:
             log.write(content)
 
     
