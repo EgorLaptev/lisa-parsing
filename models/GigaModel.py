@@ -12,7 +12,7 @@ from termcolor import colored
 # load enviroment variables
 load_dotenv('config/giga.env')
 
-with open(f'config/roles/{getenv('ROLE')}.txt', 'r', encoding='UTF-8') as file:
+with open(f"config/roles/{getenv('ROLE')}.txt", 'r', encoding='UTF-8') as file:
     role = file.read()
 
 class GigaModel:    
