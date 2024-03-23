@@ -1,6 +1,8 @@
-from models.OpenModel import OpenModel
-from models.GigaModel import GigaModel
+# from models.OpenModel import OpenModel
+# from models.GigaModel import GigaModel
+from models.GeminiModel import GeminiModel
 
-model = GigaModel()
+model = GeminiModel()
 
-model.send_file('docs/txt/ГОСТ_7_32_2017_часть.txt')
+model.send_file('docs/txt/ГОСТ_7_32_2017.txt')
+
