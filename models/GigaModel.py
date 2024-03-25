@@ -1,3 +1,4 @@
+
 from helpers.DocumentFormatter import DocumentFormatter
 # from langchain.chains.summarize import load_summarize_chain
 from langchain.schema import HumanMessage, SystemMessage
@@ -12,7 +13,7 @@ from termcolor import colored
 # load enviroment variables
 load_dotenv('config/giga.env')
 
-with open(f'config/roles/{getenv('ROLE')}.txt', 'r', encoding='UTF-8') as file:
+with open(f"config/roles/{getenv('ROLE')}.txt", 'r', encoding='UTF-8') as file:
     role = file.read()
 
 class GigaModel:    
@@ -93,8 +94,9 @@ class GigaModel:
         """ saves the model's responses """
         current_datetime = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
         
-        with open(f'logs/{'err/' if err else ''}log_{current_datetime}.txt', 'w', encoding='UTF-8') as log:
+        with open(f"logs/{'err/' if err else ''}log_{current_datetime}.txt", 'w', encoding='UTF-8') as log:
             log.write(content)
+
 
     
     def send(self, content):
