@@ -12,7 +12,7 @@ from termcolor import colored
 # Load model's role
 load_dotenv('config/open.env')
 
-with open(f'config/roles/{getenv('ROLE')}.txt', 'r', encoding='UTF-8') as file:
+with open(f"config/roles/{getenv('ROLE')}.txt", 'r', encoding='UTF-8') as file:
     role = file.read()
 
 
@@ -92,5 +92,5 @@ class OpenModel:
         """ saves the model's responses """
         current_datetime = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
         
-        with open(f'logs/{'err/' if err else ''}log_{current_datetime}.txt', 'w', encoding='UTF-8') as log:
+        with open(f"logs/{'err/' if err else ''}log_{current_datetime}.txt", 'w', encoding='UTF-8') as log:
             log.write(content)
